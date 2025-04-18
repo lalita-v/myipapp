@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Public IP</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .container { max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        #ip-result { font-size: 20px; margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Public IP Checker</h1>
+    <button onclick="getMyIP()">Get My IP</button>
+    <p id="ip-result">Your IP will appear here...</p>
+</body>
+</html>
+<script>
+    function getMyIP() {
+        fetch('/myip')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("ip-result").innerText = "Your IP: " + data.ip;
+            })
+            .catch(error => {
+                document.getElementById("ip-result").innerText = "Error getting IP.";
+                console.error("Fetch error:", error); // Log error for debugging
+            });
+    }
+</script>
